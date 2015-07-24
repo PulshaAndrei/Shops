@@ -58,6 +58,23 @@ function DestroyShopCtrl($scope, $location, $rootScope, $routeParams){
 function ProductsCtrl($scope, $location, $rootScope, $routeParams){
   if (!$rootScope.shops) { $location.path('/'); return; };
   $scope.shop = $rootScope.shops[$routeParams.shopId - 1];
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode( { 'address': $scope.shop.adress}, 
+    function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+          var pos = results[0].geometry.location;
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng(pos.A, pos.F),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(pos.A, pos.F),
+            map: map
+          });
+      }
+    }); 
+
 }
 
 function CreateProductCtrl($scope, $location, $rootScope, $routeParams){

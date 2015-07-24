@@ -8,3 +8,6 @@ body{
 td{
     vertical-align: middle!important;
 }
+#map{
+    height: 800px;
+}
