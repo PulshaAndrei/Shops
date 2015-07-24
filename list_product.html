@@ -1,0 +1,13 @@
+<h2>Список товаров магазина {{shop.name}}</h2>
+<div>
+	<a href="#/new_product/{{shop.id}}" class="btn">Добавить</a>
+	<ul>
+		<li ng-repeat="product in shop.products">
+			<span>{{product.id}}</span>
+			<span>{{product.name}}</span>
+			<span>{{product.description}}</span>
+			<a href="#/edit_product/{{shop.id}}/{{product.id}}" class="btn btn-primary">Редактировать</a>
+      		<a href="#/destroy_product/{{shop.id}}/{{product.id}}" class="btn btn-danger">Удалить</a>
+		</li>
+	</ul>
+</div>
