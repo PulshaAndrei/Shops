@@ -1,0 +1,13 @@
+body{
+	padding-top: 50px;
+}
+.btn-right{
+	float: right;
+	margin-top: -50px;
+}
+td{
+    vertical-align: middle!important;
+}
+#map{
+    height: 800px;
+}
