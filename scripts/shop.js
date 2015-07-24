@@ -12,43 +12,76 @@ angular.module('shop', []).
       otherwise({redirectTo:'/'});
   });
  
-function init($rootScope, $http) {
+function init($scope, $rootScope, $http) {
   $http.get('data/shops.json').success(function(data) {
     $rootScope.shops = data;
   });
 }
 
-function ShopListCtrl($rootScope, $location, $http) {
-  if (!$rootScope.shops) init($rootScope, $http);
+
+function ShopListCtrl($scope, $rootScope, $location, $http) {
+  if (!$rootScope.shops) init($scope, $rootScope, $http);
+
+  //Dragable
+  $(function() {
+    $( "#sortable" ).sortable({
+      revert: true,
+      update: function(){
+        var arr = $('#sortable').sortable("toArray");
+        var mas = [];
+        arr.forEach( function (elem, index) {
+          $rootScope.shops.forEach( function(el, i) {
+            if (el.num == parseInt(elem) && !mas[i]) {
+              $rootScope.shops[i].num = index + 1;
+              mas[i] = true;
+            }
+          });
+        });
+        window.location.replace('#/.');
+      }
+    });
+    $( "tbody, tr" ).disableSelection();
+  });
 }
  
 function CreateShopCtrl($scope, $location, $http, $rootScope) {
   if (!$rootScope.shops) { $location.path('/'); return; };
   $scope.save = function() {
     $scope.shop.id = $rootScope.shops.length + 1;
+    $scope.shop.num = $rootScope.shops.length + 1;
     $scope.shop.products = [];
     $rootScope.shops.push($scope.shop);
     $location.path('/');
   }
 }
- 
+
+function clone(obj){
+    var temp = {}; 
+    for(var key in obj)
+        temp[key] = obj[key];
+    return temp;
+}
+
 function EditShopCtrl($scope, $location, $rootScope, $routeParams) {
-  if (!$rootScope.shops) { $location.path('/'); return; };
-  $scope.shop = $rootScope.shops[$routeParams.shopId - 1];
+  if (!$rootScope.shops) { $location.path('/'); return; };  
+  $scope.shop = clone($rootScope.shops[$routeParams.shopId - 1]);
 
   $scope.save = function() {
     $rootScope.shops[$routeParams.shopId - 1] = $scope.shop;
-    $rootScope.shops[$routeParams.shopId - 1].id = $routeParams.shopId;
     $location.path('/');
   };
 }
 
 function DestroyShopCtrl($scope, $location, $rootScope, $routeParams){
   if (!$rootScope.shops) { $location.path('/'); return; };
+  var nextNum = $rootScope.shops[$routeParams.shopId - 1].num;
   $rootScope.shops.splice($routeParams.shopId - 1, 1);
+  console.log(nextNum);
   $rootScope.shops.forEach( function (elem, index) { 
     if (elem.id > $routeParams.shopId) 
       $rootScope.shops[index].id--;
+    if (elem.num >= nextNum) 
+      $rootScope.shops[index].num--;
   });
   $location.path('/');
 }
@@ -58,6 +91,8 @@ function DestroyShopCtrl($scope, $location, $rootScope, $routeParams){
 function ProductsCtrl($scope, $location, $rootScope, $routeParams){
   if (!$rootScope.shops) { $location.path('/'); return; };
   $scope.shop = $rootScope.shops[$routeParams.shopId - 1];
+
+  //Maps
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'address': $scope.shop.adress}, 
     function(results, status) {
@@ -90,8 +125,8 @@ function CreateProductCtrl($scope, $location, $rootScope, $routeParams){
 
 function EditProductCtrl($scope, $location, $rootScope, $routeParams){
   if (!$rootScope.shops) { $location.path('/'); return; };
-  $scope.shop = $rootScope.shops[$routeParams.shopId - 1];
-  $scope.product = $scope.shop.products[$routeParams.productId - 1];
+  $scope.shop = clone($rootScope.shops[$routeParams.shopId - 1]);
+  $scope.product = clone($scope.shop.products[$routeParams.productId - 1]);
 
   $scope.save = function(){
     $scope.product.id = $routeParams.productId;

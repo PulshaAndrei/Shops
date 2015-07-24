@@ -14,9 +14,9 @@
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr ng-repeat="shop in shops">
-				<td>{{shop.id}}</td>
+		<tbody id="sortable">
+			<tr ng-repeat="shop in shops | orderBy: 'num'" class="ui-state-default" id="{{shop.num}}">
+				<td>{{shop.num}}</td>
 				<td><a href="#/products/{{shop.id}}">{{shop.name}}</a></td>
 				<td>{{shop.adress}}</td>
 				<td>{{shop.mode}}</td>
