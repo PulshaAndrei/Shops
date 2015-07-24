@@ -22,7 +22,7 @@ function init($scope, $rootScope, $http) {
 function ShopListCtrl($scope, $rootScope, $location, $http) {
   if (!$rootScope.shops) init($scope, $rootScope, $http);
 
-  //Dragable
+  //Draggable
   $(function() {
     $( "#sortable" ).sortable({
       revert: true,
@@ -76,7 +76,6 @@ function DestroyShopCtrl($scope, $location, $rootScope, $routeParams){
   if (!$rootScope.shops) { $location.path('/'); return; };
   var nextNum = $rootScope.shops[$routeParams.shopId - 1].num;
   $rootScope.shops.splice($routeParams.shopId - 1, 1);
-  console.log(nextNum);
   $rootScope.shops.forEach( function (elem, index) { 
     if (elem.id > $routeParams.shopId) 
       $rootScope.shops[index].id--;
