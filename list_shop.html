@@ -1,14 +1,28 @@
-<h2>Список магазинов</h2>
-<div>
-	<a href="#/new_shop" class="btn">Добавить</a>
-	<ul>
-		<li ng-repeat="shop in shops">
-			<span>{{shop.id}}</span>
-			<a href="#/products/{{shop.id}}">{{shop.name}}</a>
-			<span>{{shop.adress}}</span>
-			<span>{{shop.mode}}</span>
-			<a href="#/edit_shop/{{shop.id}}" class="btn btn-primary">Редактировать</a>
-      <a href="#/destroy_shop/{{shop.id}}" class="btn btn-danger">Удалить</a>
-		</li>
-	</ul>
+<div class="page-header">
+	<h1>Список магазинов</h1>
+	<a href="#/new_shop" class="btn btn-success btn-right">Добавить</a>
+</div>
+<div>	
+	<table class="table table-striped table-hover ">
+		<thead>
+			<tr>
+				<th>Номер</th>
+				<th>Название магазина</th>
+				<th>Адрес</th>
+				<th>Время работы</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="shop in shops">
+				<td>{{shop.id}}</td>
+				<td><a href="#/products/{{shop.id}}">{{shop.name}}</a></td>
+				<td>{{shop.adress}}</td>
+				<td>{{shop.mode}}</td>
+				<td><a href="#/edit_shop/{{shop.id}}" class="btn btn-primary">Редактировать</a></td>
+				<td><a href="#/destroy_shop/{{shop.id}}" class="btn btn-danger">Удалить</a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>

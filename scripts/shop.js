@@ -2,11 +2,11 @@ angular.module('shop', []).
   config(function($routeProvider) {
     $routeProvider.
       when('/', {controller: ShopListCtrl, templateUrl: 'list_shop.html'}).
-      when('/new_shop', {controller: CreateShopCtrl, templateUrl: 'new_shop.html'}).
+      when('/new_shop', {controller: CreateShopCtrl, templateUrl: 'edit_shop.html'}).
       when('/edit_shop/:shopId', {controller: EditShopCtrl, templateUrl: 'edit_shop.html'}).
       when('/destroy_shop/:shopId', {controller: DestroyShopCtrl, templateUrl: 'list_shop.html'}).
       when('/products/:shopId', {controller: ProductsCtrl, templateUrl: 'list_product.html'}).
-      when('/new_product/:shopId', {controller: CreateProductCtrl, templateUrl: 'new_product.html'}).
+      when('/new_product/:shopId', {controller: CreateProductCtrl, templateUrl: 'edit_product.html'}).
       when('/edit_product/:shopId/:productId', {controller: EditProductCtrl, templateUrl: 'edit_product.html'}).
       when('/destroy_product/:shopId/:productId', {controller: DestroyProductCtrl, templateUrl: 'list_product.html'}).
       otherwise({redirectTo:'/'});

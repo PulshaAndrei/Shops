@@ -6,10 +6,25 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
 	<script src="scripts/shop.js"></script>
-	<script src="scripts/data.js"></script>
-	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/sandstone/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
-<body>
-	<div ng-view></div>
+<body class="class">
+	<div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#/" class="navbar-brand">Shops</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/">Информация</a></li>
+            <li><a href="#/">Контакты</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    	<div class="page-header" ng-view></div>
+    </div>	
 </body>
 </html>

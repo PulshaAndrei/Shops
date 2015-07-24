@@ -1,23 +1,33 @@
-<form name="myForm">
-  <div class="control-group" ng-class="{error: myForm.name.$invalid}">
-    <label>Название</label>
-    <input type="text" name="name" ng-model="shop.name" required>
-    <span ng-show="myForm.name.$error.required" class="help-inline">не заполнено</span>
-  </div>
- 
-  <div class="control-group" ng-class="{error: myForm.adress.$invalid}">
-    <label>Адрес</label>
-    <input type="text" name="adress" ng-model="shop.adress" required>
-    <span ng-show="myForm.adress.$error.required" class="help-inline">не заполнено</span>
-  </div>
- 
-  <div class="control-group" ng-class="{error: myForm.mode.$invalid}">
-    <label>Время работы</label>
-    <input type="text" name="mode" ng-model="shop.mode" required>
-    <span ng-show="myForm.mode.$error.required" class="help-inline">не заполнено</span>
-  </div>
- 
-  <br>
-  <a href="#/" class="btn">Отмена</a>
-  <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-primary">Сохранить</button>
+<div class="page-header">
+  <h1>Добавление магазина {{shop.name}}</h1>
+</div>
+<form name="myForm" class="form-horizontal">
+  <fieldset>
+    <div class="form-group" ng-class="{'has-error': myForm.name.$invalid,'has-success': myForm.name.$valid}">
+      <label class="col-lg-2 control-label">Название</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" name="name" ng-model="shop.name" required>
+      </div>     
+    </div>
+   
+    <div class="form-group" ng-class="{'has-error': myForm.adress.$invalid,'has-success': myForm.adress.$valid}">
+      <label class="col-lg-2 control-label">Адрес</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" name="adress" ng-model="shop.adress" required>
+      </div>
+    </div>
+   
+    <div class="form-group" ng-class="{'has-error': myForm.mode.$invalid,'has-success': myForm.mode.$valid}">
+      <label class="col-lg-2 control-label">Время работы</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" name="mode" ng-model="shop.mode" required>
+      </div>
+    </div>
+   
+    <br>
+    <div class="row">
+      <a href="#/" class="btn btn-primary col-lg-2 col-lg-offset-1">Отмена</a>
+      <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-lg-2 col-lg-offset-1">Сохранить</button>
+    </div>    
+  </fieldset>  
 </form>
