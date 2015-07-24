@@ -1,2 +1,2 @@
 # Shops
-Test task
+Demo: http://pulshaandrei.github.io/Shops/
